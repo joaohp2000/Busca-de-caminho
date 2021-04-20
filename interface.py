@@ -143,11 +143,7 @@ res = (0,0) # screen resolution
 screen = pygame.display.set_mode(res,pygame.RESIZABLE)# opens up a window
 screen.fill(WHITE) #pinta tela de branco
 def main(screen):
-    flag=0
     while True:
-        
-            
-            #draw(screen, grid, len(matriz), 800)
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 pygame.quit()
@@ -166,8 +162,7 @@ def main(screen):
                         screen.fill(WHITE)
                         cria_grid(screen, len(matriz))
                         Pinta_Grid(screen, matriz)
-                    else:
-                        flag=0
+                    
         # fills the screen with a color
         
        
