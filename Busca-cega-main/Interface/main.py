@@ -62,13 +62,14 @@ def main(screen):
                         #FAZ ALGO
                         x=0
                     if 10 <= mouse[0] <= 10+140 and 110 <= mouse[1] <= 110+40: #busca cega
-                       solucao=busca_cega.busca_custo_uniforme(entrada,saida, matriz, screen)
-                       print(solucao)
-                       custo_total = solucao[0]
-                       del solucao[0]
-                       print(solucao)
-                       interface.Pinta_solucao(screen, matriz, solucao, 0)
-                       pygame.display.update()
+                        solucao=busca_cega.busca_custo_uniforme(entrada,saida, matriz, screen)
+                        print(solucao)
+                        custo_total = solucao[0]
+                        del solucao[0]
+                        print(solucao)
+                        interface.Pinta_solucao(screen, matriz, solucao, 0)
+                        pygame.display.update()
+                    
         # fills the screen with a color
         
        
