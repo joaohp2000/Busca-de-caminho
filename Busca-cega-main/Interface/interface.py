@@ -5,6 +5,7 @@ from tkinter import *
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 
+import busca_cega
 
 color_light = (170,170,170)# light shade of the button
 color_dark = (100,100,100) # dark shade of the button
@@ -165,7 +166,7 @@ def Pinta_borda(tela, matriz, p, flag):
     
 def Pinta_solucao(tela, matriz, solucao, flag): #pinta o grid feito, recebe a tela e a matriz
     #screen.fill(WHITE)
-    
+    custo = 0 - busca_cega.matriz_valores(matriz,solucao[0])
     blockSize = (700/len(matriz))#Set the size of the grid block
     for p in solucao:
         if p[0]==0 and p[1]==0:
@@ -178,8 +179,11 @@ def Pinta_solucao(tela, matriz, solucao, flag): #pinta o grid feito, recebe a te
             rect = pygame.Rect(int(blockSize)*p[1]+300, int(blockSize)*p[0]+20, int(blockSize)-1, int(blockSize)-1)
     
         time.sleep(0.05)
+        custo = custo + busca_cega.matriz_valores(matriz,p)
         pygame.draw.rect(tela, WHITE, rect)
         pygame.display.update()
+    
+    print(custo)
 
         
         
