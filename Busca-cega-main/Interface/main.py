@@ -7,6 +7,7 @@ from tkinter.filedialog import askopenfilename
 
 import interface
 import busca_cega
+import busca_estrela
 
 color_light = (170,170,170)# light shade of the button
 color_dark = (100,100,100) # dark shade of the button
@@ -69,7 +70,15 @@ def main(screen):
                         print(solucao)
                         interface.Pinta_solucao(screen, matriz, solucao, 0)
                         pygame.display.update()
-                    
+                    if 10 <= mouse[0] <= 10+140 and 60 <= mouse[1] <= 60+40: #botao de a*
+                        solucao=busca_A.func_busca_A(entrada,saida, matriz, screen)
+                        print(solucao)
+                        custo_total = solucao[1]
+                        del solucao[0]
+                        del solucao[0]
+                        print(solucao)
+                        interface.Pinta_solucao(screen, matriz, solucao, 0)
+                        pygame.display.update()
         # fills the screen with a color
         
        
