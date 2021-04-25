@@ -7,7 +7,7 @@ from tkinter.filedialog import askopenfilename
 
 import interface
 import busca_cega
-import busca_estrela
+import busca_A
 
 color_light = (170,170,170)# light shade of the button
 color_dark = (100,100,100) # dark shade of the button
