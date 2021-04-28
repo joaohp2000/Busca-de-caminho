@@ -1,7 +1,8 @@
 
 import interface
-from math import sqrt
-def busca_custo_uniforme(entrada,saida, matriz, tela):
+
+
+def busca_custo_uniforme(entrada,saida, matriz, grid):
     no=0
     borda=[[0,[0,0]]]
     borda[0]=[0,entrada]
@@ -9,13 +10,12 @@ def busca_custo_uniforme(entrada,saida, matriz, tela):
     explorado=[]
     while True:
         if len(borda) == 0: return -1
-        #else: print(len(borda))
+   
         no=borda.pop(0)
         if no[-1]==saida :
             return no
         if no[-1] not in explorado:
             explorado.append(no[-1])
-            #print(no[-1])
             filhos = verifica_vizinhos(no[-1],len(matriz))
            # interface.Pinta_borda(tela, matriz, no[-1],0)
             for filho in filhos:
@@ -23,10 +23,10 @@ def busca_custo_uniforme(entrada,saida, matriz, tela):
                 if filho not in explorado:
                     novo_no[0]=novo_no[0]+matriz_valores(matriz,filho)
                     novo_no.append(filho)
-                    interface.Pinta_borda(tela, matriz, filho,0)
+                    interface.Pinta_borda(grid, matriz, filho,0)
                     borda.append(novo_no)
             borda.sort()
-            #print(borda)
+
 
     
 def verifica_vizinhos(estado, tamanho_matriz):

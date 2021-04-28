@@ -23,57 +23,25 @@ ORANGE = (255, 165 ,0)
 GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
 MARROM = (75, 54, 33)
-MARROM_ESCURO = (36,0,0)
+MARROM_ESCURO = (40,19,0)
 
-class cubo: #classe botão
-    def __init__(self, tela, tamanho, p, matriz): #construtor recebe a tela e sua cor
-        self.tela=tela
-        self.tamanho=tamanho
-        self.p=p
-        
-        rect = pygame.Rect(self.tamanho*self.p[0]+300, self.tamanho*self.p[1]+20,self.tamanho-1, self.tamanho-1)
-        rect2 = pygame.Rect(self.tamanho*self.p[0]+300, self.tamanho*self.p[1]+20,self.tamanho, self.tamanho)
-      #  pygame.draw.rect(self.tela, BLUE, rect)
-       # pygame.draw.rect(self.tela, BLACK, rect2, 1)
-        
-        x1=(tamanho*p[0]+299+tamanho)
-        y1=(tamanho*p[1]+19+tamanho)
-        x2=(tamanho*p[0]+296+tamanho)
-        y2=(tamanho*p[1]+16+tamanho)
-        x3=(tamanho*p[0]+300)
-        y3=(tamanho*p[1]+23)
-        x4=(tamanho*p[0]+303)
-        y4=(tamanho*p[1]+20)
-        
-        
-        
-        
-        pygame.draw.polygon(tela,BLACK,[(x1,y1),(x2,y2)],1)
-        pygame.draw.polygon(tela,BLACK,[(x1,y4),(x2,y3)],1)
 
-        pygame.draw.polygon(tela,BLACK,[(x3,y1),(x4,y2)],1)
-        pygame.draw.polygon(tela,BLACK,[(x3,y4),(x4,y3)],1)
-        #pygame.draw.polygon(screen,RED,[(x1,y1),(x2,y2),(x2-tamanho, y2),(x1-tamanho, y1)],0)
+class Celula:
+    def __init__(self, tamanho_matriz, tela, pos):
+        self.tela= tela
+        self.tamanho_matriz= tamanho_matriz
+        self.color = BLACK
+        self.x = pos[1]
+        self.y = pos[0]
+        self.celula_size = 700//self.tamanho_matriz
+        rect = pygame.Rect(self.celula_size*self.x+200, self.celula_size*self.y+20, self.celula_size, self.celula_size)
+        pygame.draw.rect(self.tela, self.color, rect, 1)
 
-        #pygame.draw.polygon(screen,BLACK,[(x1,y1),(x2,y2),(x3,y3),(x4,y4)],1)
-        #pygame.draw.polygon(screen,BLACK,[(x1,y1),(x2,y2),(x2-tamanho, y2),(x1-tamanho, y1)],1)
+    def pinta_celula(self, cor):
+        self.color = cor 
+        rect = pygame.Rect(self.celula_size*self.x+201, self.celula_size*self.y+21, self.celula_size-1, self.celula_size-1)
+        pygame.draw.rect(self.tela, self.color, rect)
         
-        
-        rect2 = pygame.Rect(self.tamanho*self.p[0]+304, self.tamanho*self.p[1]+24,tamanho-8,tamanho-8)
-        
-        
-        #pygame.draw.rect(tela,BLACK, (296, 16, 20,20), 1)
-        if matriz[p[1]][p[0]] == 1:
-            color=DARK_GREEN
-        elif matriz[p[1]][p[0]] == 2:
-            color=MARROM_ESCURO
-        elif matriz[p[1]][p[0]] == 3: 
-            color=DARK_BLUE
-        elif matriz[p[1]][p[0]] == 4:
-            color=DARK_RED
-        pygame.draw.rect(tela, color, rect2)
-        pygame.draw.rect(tela,BLACK, rect2, 1)
-
 class botao: #classe botão
     def __init__(self, tela, color, pos_tam, texto, pos_tex): #construtor recebe a tela e sua cor
         self.tela=tela
@@ -86,6 +54,7 @@ class botao: #classe botão
 def open_file():  #função para abrir e ler arquivo e retorna a matriz de dados
     matriz=0
     root=Tk()
+    root.withdraw()
     root.filename = askopenfilename() #
     root.destroy()
     name_file=root.filename
@@ -102,86 +71,50 @@ def open_file():  #função para abrir e ler arquivo e retorna a matriz de dados
     return matriz
 
 def cria_grid(tela, tamanho_matriz): #cria o grind, recebe a tela onde sera criado e o tamanho da matriz
-    blockSize = 700/tamanho_matriz #Set the size of the grid block
-    for x in range(tamanho_matriz):
-        for y in range(tamanho_matriz):
-            rect = pygame.Rect(int(blockSize)*x+300, int(blockSize)*y+20, int(blockSize), int(blockSize))
-            pygame.draw.rect(tela, BLACK, rect, 1)
-            
+    matriz=[]
+    for y in range(tamanho_matriz):
+        matriz.append([])
+        for x in range(tamanho_matriz):
+            celula=Celula(tamanho_matriz, tela, [y,x])
+            matriz[y].append(celula)
 
-def Pinta_Grid(tela, matriz): #pinta o grid feito, recebe a tela e a matriz
-    #screen.fill(WHITE)
-    blockSize = (700/len(matriz))#Set the size of the grid block
-    for x in range(len(matriz)):
-        for y in range(len(matriz)):
-            if x==0 and y==0:
-                rect = pygame.Rect(int(blockSize)*x+301, int(blockSize)*y+21, int(blockSize)-2, int(blockSize)-2)
-            elif x==0:
-                rect = pygame.Rect(int(blockSize)*x+301, int(blockSize)*y+20, int(blockSize)-2, int(blockSize)-1)
-            elif y==0:
-                rect = pygame.Rect(int(blockSize)*x+300, int(blockSize)*y+21, int(blockSize)-1, int(blockSize)-2)
-            else:
-                rect = pygame.Rect(int(blockSize)*x+300, int(blockSize)*y+20, int(blockSize)-1, int(blockSize)-1)
+    return matriz         
+
+def Pinta_Grid(matriz, grid): #pinta o grid feito, recebe a tela e a matriz
+    #screen.fill(WHITE)z
+    for y in range(len(matriz)):
+        for x in range(len(matriz)):
             if matriz[y][x] == 1:
-                pygame.draw.rect(tela, GREEN, rect)
+                grid[y][x].pinta_celula(GREEN)
             elif matriz[y][x] == 2:
-                pygame.draw.rect(tela, MARROM, rect )
+                grid[y][x].pinta_celula(MARROM)
             elif matriz[y][x] == 3: 
-                pygame.draw.rect(tela, BLUE, rect )
-            elif matriz[y][x] == 4: 
-                pygame.draw.rect(tela, RED, rect)
+                grid[y][x].pinta_celula(BLUE)
+            elif matriz[y][x] == 4:
+                grid[y][x].pinta_celula(RED)
 
-def Pinta_borda(tela, matriz, p, flag):
-    blockSize = (700/len(matriz))#Set the size of the grid block
-    rect2 = pygame.Rect(int(blockSize)*p[1]+300, int(blockSize)*p[0]+20, int(blockSize), int(blockSize))
-    if p[0]==0 and p[1]==0:
-        rect = pygame.Rect(int(blockSize)*p[1]+301, int(blockSize)*p[0]+21, int(blockSize)-2, int(blockSize)-2)
-    elif p[1]==0:
-        rect = pygame.Rect(int(blockSize)*p[1]+301, int(blockSize)*p[0]+20, int(blockSize)-2, int(blockSize)-1)
-    elif p[0]==0:
-        rect = pygame.Rect(int(blockSize)*p[1]+300, int(blockSize)*p[0]+21, int(blockSize)-1, int(blockSize)-2)
-    else:
-        rect = pygame.Rect(int(blockSize)*p[1]+300, int(blockSize)*p[0]+20, int(blockSize)-1, int(blockSize)-1)
-    
+def Pinta_borda(grid, matriz, p, flag):
+
     if flag==0:
         if matriz[p[0]][p[1]] == 1:
-            pygame.draw.rect(tela, DARK_GREEN, rect)
-            #pygame.draw.rect(tela, BLACK, rect2, 1)
+            grid[p[0]][p[1]].pinta_celula(DARK_GREEN)
         elif matriz[p[0]][p[1]] == 2:
-            pygame.draw.rect(tela, MARROM_ESCURO, rect )
-            #pygame.draw.rect(tela, BLACK, rect2, 1)
+            grid[p[0]][p[1]].pinta_celula(MARROM_ESCURO)
         elif matriz[p[0]][p[1]] == 3: 
-            pygame.draw.rect(tela, DARK_BLUE, rect )
-            #pygame.draw.rect(tela, BLACK, rect2, 1)
+            grid[p[0]][p[1]].pinta_celula(DARK_BLUE)
         elif matriz[p[0]][p[1]] == 4: 
-            pygame.draw.rect(tela, DARK_RED, rect)
-            #pygame.draw.rect(tela, BLACK, rec2t, 1)
+            grid[p[0]][p[1]].pinta_celula(DARK_RED)
+
     else:
         x=1
-        #cubo(tela, int(blockSize), p, matriz )
-        #pygame.draw.rect(tela, color_light, rect)
+        
     
     pygame.display.update()
     
-def Pinta_solucao(tela, matriz, solucao, flag): #pinta o grid feito, recebe a tela e a matriz
-    #screen.fill(WHITE)
-    
-    blockSize = (700/len(matriz))#Set the size of the grid block
-    for p in solucao:
-        if p[0]==0 and p[1]==0:
-                rect = pygame.Rect(int(blockSize)*p[1]+301, int(blockSize)*p[0]+21, int(blockSize)-2, int(blockSize)-2)
-        elif p[1]==0:
-            rect = pygame.Rect(int(blockSize)*p[1]+301, int(blockSize)*p[0]+20, int(blockSize)-2, int(blockSize)-1)
-        elif p[0]==0:
-            rect = pygame.Rect(int(blockSize)*p[1]+300, int(blockSize)*p[0]+21, int(blockSize)-1, int(blockSize)-2)
-        else:
-            rect = pygame.Rect(int(blockSize)*p[1]+300, int(blockSize)*p[0]+20, int(blockSize)-1, int(blockSize)-1)
-    
+def Pinta_solucao(grid, solucao): #pinta na tela o caminho encontrado de branco 
+    for p in solucao:                      #recebe matriz de objetos, e lista com coordenadas da solucao
         time.sleep(0.05)
-        pygame.draw.rect(tela, WHITE, rect)
+        grid[p[0]][p[1]].pinta_celula(WHITE)
         pygame.display.update()
 
         
-        
-   
-
