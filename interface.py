@@ -153,6 +153,7 @@ def Pinta_borda(grid, matriz, p, flag):
     pygame.display.update()
     
 def Pinta_solucao(grid, solucao): #pinta na tela o caminho encontrado de branco 
+    time.sleep(0.5)
     for p in solucao:                      #recebe matriz de objetos, e lista com coordenadas da solucao
         time.sleep(0.05)
         grid[p[0]][p[1]].pinta_celula(WHITE)
