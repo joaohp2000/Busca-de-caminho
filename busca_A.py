@@ -7,7 +7,7 @@ import busca_cega
 
 def func_busca_A(origem, destino, matriz, grid):
    cube = 0
-   ppos=0
+   nos_visitados=0
    borda=[[0,0,[0,0]]]
    borda[0]=[0,0, origem]
    
@@ -22,14 +22,14 @@ def func_busca_A(origem, destino, matriz, grid):
            #print(destino)
            
            if cube[-1] == destino:
-               print("ppos %d" %ppos)
+               cube.append(nos_visitados)
                return cube
             
            if cube[-1] not in visitados:
-                ppos=ppos+1
+                nos_visitados=nos_visitados+1
                 visitados.append(cube[-1])
                 vizinhos = busca_cega.verifica_vizinhos(cube[-1],len(matriz))
-                #interface.Pinta_borda(grid, matriz, filho,0)
+                interface.Pinta_borda(grid, matriz, cube[-1],0)
                 for vizinho in vizinhos:
                     new_cube = cube[:]
                     if vizinho not in visitados:
@@ -37,7 +37,7 @@ def func_busca_A(origem, destino, matriz, grid):
                         new_cube[1] = new_cube[1] + busca_cega.matriz_valores(matriz,vizinho)
                         #print("checando posicao", new_cube[1])
                         new_cube.append(vizinho)
-                        interface.Pinta_borda(grid, matriz, vizinho,0)
+                        interface.Pinta_borda(grid, matriz, vizinho,1)
                         borda.append(new_cube)
                 borda.sort()
            

@@ -4,26 +4,28 @@ import interface
 
 def busca_custo_uniforme(entrada,saida, matriz, grid):
     no=0
-    borda=[[0,[0,0]]]
+    borda=[[0,[0,0]]] # [custo, [A], [B], [c]]
     borda[0]=[0,entrada]
+    nos_visitados=0
     print(borda)
     explorado=[]
     while True:
         if len(borda) == 0: return -1
-   
         no=borda.pop(0)
         if no[-1]==saida :
+            no.append(nos_visitados)
             return no
         if no[-1] not in explorado:
+            nos_visitados=nos_visitados+1
             explorado.append(no[-1])
             filhos = verifica_vizinhos(no[-1],len(matriz))
-           # interface.Pinta_borda(tela, matriz, no[-1],0)
+            interface.Pinta_borda(grid, matriz, no[-1],0)
             for filho in filhos:
                 novo_no=no[:]
                 if filho not in explorado:
                     novo_no[0]=novo_no[0]+matriz_valores(matriz,filho)
                     novo_no.append(filho)
-                    interface.Pinta_borda(grid, matriz, filho,0)
+                    interface.Pinta_borda(grid, matriz, filho,1)
                     borda.append(novo_no)
             borda.sort()
 
