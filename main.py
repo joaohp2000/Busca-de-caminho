@@ -7,18 +7,7 @@ import busca_A
 
 
 WHITE = (255, 255, 255)
-
-
-pygame.init() # initializing the constructor
-res = (1000,700) # screen resolution
-screen = pygame.display.set_mode(res)
 grid=[]
-screen = pygame.display.set_mode((1000,700))
-background = pygame.image.load('imagens_e_fontes/labirinto3.jpg')
-screen.fill((0,0,0))
-screen.blit(background, (0, 0))
-
-
 def main(screen):
     mostra_botoes=0
     solucao=0
