@@ -19,40 +19,12 @@ Figura 1: Ambiente a ser explorado pelo robô. Cores: verde – terreno sólido 
 
 – pântano; marrom – montanhoso; vermelho – fogo.
 
-**Informações Adicionais:**
+**Informações Sobre o Projeto:**
 
-- O robô pode andar somente na vertical e na horizontal;
-- Para o algoritmo A\*, utilize como heurística a distância Manhattan entre a localização atual e a localização destino.
-- O ambiente deve ser representado por uma matriz 42 x 42 (igual mostrado na Figura 1);
-- O sistema deve permitir que o ambiente seja configurável (por arquivo de entrada);
-- A posição inicial do robô e do seu destino devem ser configuráveis (por arquivo de entrada);
-- Durante o procedimento de busca, deve ser mostrado no ambiente (ou em um ambiente auxiliar) os nós que já foram visitados e os nós que estão na fronteira de visitação;
-- Após calcular a rota (caminho da posição inicial do robô até posição de destino), o programa deve mostrar quantos nós foram **visitados** pelo algoritmo de busca, ou seja, quantos nós foram abertos na árvore de busca;
-- O programa deve exibir o custo do caminho percorrido pelo agente ao terminar a execução;
-- Após calcular a rota (caminho da posição inicial do robô até posição de destino), o programa deve mostrar a movimentação do robô seguindo a rota calculada (mostrar caminho encontrado origem-destino);
-- O programa pode ser desenvolvido em qualquer linguagem de programação;
-- O trabalho pode ser realizado em grupos de no máximo 2 pessoas;
+- O robô anda somente na vertical e na horizontal;
+- O algoritmo A\*, utiliza como heurística a distância Manhattan entre a localização atual e a localização destino.
+- O ambiente é configuravél por arquivo de entrada, tanto o mapa quanto a posição inicial e de destino;
 
-**Forma de avaliação:**
 
-Será avaliado se:
 
-- O trabalho atendeu a todos os requisitos especificados anteriormente;
-- Os algoritmos foram implementados e aplicados de forma correta;
-- O código foi devidamente organizado;
-- O sistema apresenta interface gráfica com o mapa.
-- O trabalho foi apresentado corretamente em sala de aula. O programa deve ser apresentado durante a aula.
 
-**Cronograma:**
-
-- Cada dupla deve escolher um nome, que seja representativo para a área de Inteligência Artificial até dia 09/04. Esse nome deve ser postado e justificado em uma tarefa disponível no Canvas
-- Cada dupla deverá apresentar o projeto para a turma (projeto em execução)
-- Cada dupla deverá votar em dois projetos de que tenha gostado mais. Não pode votar em si mesmo (O projeto mais votado valerá 1 ponto a mais no projeto).
-
-**Data de entrega:**
-
-04/05/2021. (Apresentação em sala)
-
-**Importante:**
-
-Trabalhos entregues após a data limite valem um (1.0) ponto a menos para cada dia de atraso, com limite de 3 dias.
