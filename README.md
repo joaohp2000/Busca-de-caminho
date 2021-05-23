@@ -2,7 +2,7 @@
 
 **Descrição:**
 
-O trabalho consiste em implementar um sistema de navegação automática de um robô utilizando os algoritmos de **busca cega de custo uniforme** e **busca com informação A\***. O robô deve ser capaz de calcular automaticamente a rota para chegar a qualquer ponto de um ambiente representado através de uma matriz *n* x *n*.
+O trabalho consiste em implementar um sistema de navegação automática de um robô utilizando os algoritmos de **busca cega de custo uniforme** e **busca com informação A\***. O robô calcula automaticamente a rota para chegar a qualquer ponto de um ambiente representado através de uma matriz *n* x *n*.
 
 O ambiente por onde o robô vai navegar é formado por diversos tipos de terrenos e em cada tipo de terreno o robô tem um grau de dificuldade diferente para andar. A Figura 1 mostra o ambiente a ser explorado pelo robô. Por exemplo, o robô consegue passar facilmente por um terreno sólido e plano, porém terá dificuldades para andar em um terreno montanhoso ou em um pântano.
 
